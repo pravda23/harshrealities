@@ -1,224 +1,202 @@
 <!DOCTYPE html>
-<head>
- <title>Redux</title> 
- <style type=text/css>
-
-body {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  font-family: "Montserrat", "Arial";
-}
-
-.container > div, container > button {
-  padding: 1rem;
-}
-
-.button {
-  background: maroon;
-  border: 1px solid pink;
-  border-radius: 50%;
-  color: white;
-  padding: 1rem;
-  margin-right: .5rem;
-
-}
-
-.option {
-  display: flex;
-  align-items: center;
-  padding: 1rem;
-  /* justify-content: center; */
-}
-
-.title-container {
-  display: flex;
-  justify-content: center;
-  /* align-items: center; */
-  font-size: 2rem;
-  color: white;
-  background: maroon;
-  border: 1px solid pink;
-  border-radius: 5px;
-  padding: 1rem;
-}
-
-.bank-balance-container {
-  border: 1px solid pink;
-  border-radius: 5px;
-}
-
-.bank-balance-title {
-  display: flex;
-  justify-content: center;
-}
-
-#bank-balance {
-  display: flex;
-  justify-content: center;
-  font-size: 4rem
-}
-
-
-
- </style>
-</head>
-<body>
-  <div class="container">
-    <div class="title-container">CHOOSE LIFE</div>
-    <div class="option">
-      <button class="button" id="earn"></button>
-      <div>WORK TO EARN AND PROVIDE FOR MY FAMILY</div>
-    </div>
-    <div class="option">
-      <button class="button" id="spend"></button>
-      <div>ENJOY LIFE AND TAKE WHATEVER COMES</div>
-    </div>
-    <div class="bank-balance-container">
-    <div class="bank-balance-title"><b>YOUR BANK BALANCE IS</b></div>
-    <div id="bank-balance">0</div>
-    </div>
-  </div>
-
-<script type="module">
-  console.log("test")
-  import { createStore } from "https://unpkg.com/redux@latest/dist/redux.browser.mjs";
-  const initialBalance = {
-    value: 0
-  };
-  
-function reducer(state = initialBalance, action) {
-  switch (action.type) {
-  case 'EARN': 
-    return {...state, value: state.value + 1000};
-  case 'SPEND': 
-    return {...state, value: state.value - 1000};
-  default:
-    return state;
-  }
-};
-
-const store = createStore(reducer);
-const displayBalance = document.querySelector("#bank-balance");
-
-function render() {
-      const state = store.getState();
-      displayBalance.innerHTML = `$${state.value.toString()}`;
-}
-render();
-
-store.subscribe(render);
-
-document.querySelector("#earn").addEventListener("click", function () {
-// console.log('earn clicked');
-store.dispatch({type: 'EARN'});
-});
-document.querySelector("#spend").addEventListener("click", function () {
-// console.log('spend clicked');
-store.dispatch({type: 'SPEND'});
-});
-
-  </script>
-</body>
-</html>
-
-
-
-
-<!-- <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Redux basic example</title>
+    <style type="text/css">
+      * {
+        box-sizing: border-box;
+      }
+
+      :root {
+        --color-dark: #10327e;
+        --color-light: #507ddf;
+        --font-small: 1rem;
+        --font-med: 2rem;
+        --font-large: 3rem;
+        --font-xlarge: 8rem;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        font-family: "Roboto", "Arial";
+        font-weight: bold;
+        font-size: var(--font-med);
+      }
+
+      .container {
+        /* position: absolute; */
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 3rem;
+        /* border: 1px solid red */
+      }
+
+      .container > div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+        width: 100%;
+      }
+
+      .title-container {
+        display: flex;
+        justify-content: center;
+        /* align-items: center; */
+        font-size: var(--font-large);
+        color: var(--color-dark);
+        border-bottom: 1px solid var(--color-dark);
+        padding: 1rem;
+      }
+
+      .options {
+        padding: 2rem;
+        margin: 2rem;
+        display: flex;
+      }
+
+      .selector {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        color: var(--color-dark);
+        border: 1px solid var(--color-dark);
+        border-radius: 5px;
+        padding: 1rem;
+        margin: 1rem;
+      }
+
+      .selector:hover {
+        background: var(--color-dark);
+        color: white;
+      }
+
+      .bank-balance-title {
+        display: flex;
+        justify-content: center;
+        font-size: var(--font-large);
+      }
+
+      #bank-balance {
+        display: flex;
+        justify-content: center;
+        font-size: var(--font-xlarge);
+      }
+
+      #reset {
+        font-size: var(--font-med);
+      }
+
+      .diff {
+        border: 1px solid red;
+        animation-name: showAdded;
+        animation-duration: 500ms;
+      }
+
+      @keyframes showAdded {
+        0% {
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+
+        100% {
+          opacity: 0;
+        }
+      }
+    </style>
   </head>
   <body>
-    <div>
-      <p>
-        Clicked: <span id="value">0</span> times
-        <button id="increment">+</button>
-        <button id="decrement">-</button>
-        <button id="incrementIfOdd">Increment if odd</button>
-        <button id="incrementAsync">Increment async</button>
-      </p>
+    <div class="container">
+      <div class="title-container">WHAT ARE YOU DOING TODAY?</div>
+      <div class="options">
+        <div class="selector" id="earn">WORKING TO PROVIDE FOR MY FAMILY</div>
+        <div class="selector" id="spend">ENJOYING LIFE ON MY TERMS</div>
+      </div>
+      <div class="bank-balance-container">
+        <div class="bank-balance-title"><b>YOUR BANK BALANCE IS</b></div>
+        <div id="bank-balance">0</div>
+      </div>
+      <div class="diff"></div>
+      <button id="reset">RESET</button>
     </div>
+
     <script type="module">
       import { createStore } from "https://unpkg.com/redux@latest/dist/redux.browser.mjs";
-      // Define an initial state value for the app
-
-      const initialState = {
-        value: 0
+      const initialBalance = {
+        value: 0,
+        numToAdd: 0,
+        numToSubtract: 0,
+        diff: 0,
       };
 
-
-      // Create a "reducer" function that determines what the new state
-      // should be when something happens in the app
-
-
-      function counterReducer(state = initialState, action) {
-        // Reducers usually look at the type of action that happened
-        // to decide how to update the state
+      function reducer(state = initialBalance, action) {
         switch (action.type) {
-          case "counter/incremented":
-            return { ...state, value: state.value + 1 };
-          case "counter/decremented":
-            return { ...state, value: state.value - 1 };
+          case "EARN":
+            return {
+              ...state,
+              numToAdd: Math.floor(Math.random() * 10),
+              value: state.value + state.numToAdd,
+              diff: state.value - state.numToAdd,
+            };
+          case "SPEND":
+            return {
+              ...state,
+              value: state.value - numToSubtract,
+              numToSubtract: Math.floor(Math.random() * 10),
+            };
+
+          case "RESET":
+            return {
+              ...state,
+              diff: 0,
+            };
+
           default:
-            // If the reducer doesn't care about this action type,
-            // return the existing state unchanged
             return state;
         }
       }
 
-      // Create a new Redux store with the `createStore` function,
-      // and use the `counterReducer` for the update logic
-      const store = createStore(counterReducer);
-      console.log(store.getState());
-      // Our "user interface" is some text in a single HTML element
-      const valueEl = document.getElementById("value");
+      const store = createStore(reducer);
+      const displayBalance = document.querySelector("#bank-balance");
+      const diff = document.querySelector(".diff");
+      const reset = document.querySelector("#reset");
 
-      // Whenever the store state changes, update the UI by
-      // reading the latest store state and showing new data
-      function render() {
-        const state = store.getState();
-        valueEl.innerHTML = state.value.toString();
+      function resetDiff() {
+        state.diff = 0;
       }
 
-      // Update the UI with the initial data
+      function render() {
+        const state = store.getState();
+        displayBalance.innerHTML = `$${state.value.toString()}`;
+        diff.innerHTML =
+          `numToAdd: ${state.numToAdd}` +
+          "<br />" +
+          `diff: $${Math.abs(state.diff).toString()}`;
+      }
       render();
-      // And subscribe to redraw whenever the data changes in the future
+
       store.subscribe(render);
 
-      // Handle user inputs by "dispatching" action objects,
-      // which should describe "what happened" in the app
-      document
-        .getElementById("increment")
-        .addEventListener("click", function () {
-          store.dispatch({ type: "counter/incremented" });
-        });
-
-      document
-        .getElementById("decrement")
-        .addEventListener("click", function () {
-          store.dispatch({ type: "counter/decremented" });
-        });
-
-      document
-        .getElementById("incrementIfOdd")
-        .addEventListener("click", function () {
-          // We can write logic to decide what to do based on the state
-          if (store.getState().value % 2 !== 0) {
-            store.dispatch({ type: "counter/incremented" });
-          }
-        });
-
-      document
-        .getElementById("incrementAsync")
-        .addEventListener("click", function () {
-          // We can also write async logic that interacts with the store
-          setTimeout(function () {
-            store.dispatch({ type: "counter/incremented" });
-          }, 1000);
-        });
+      document.querySelector("#earn").addEventListener("click", function () {
+        // console.log('earn clicked');
+        store.dispatch({ type: "EARN" });
+      });
+      document.querySelector("#spend").addEventListener("click", function () {
+        // console.log('spend clicked');
+        store.dispatch({ type: "SPEND" });
+      });
+      document.querySelector("#reset").addEventListener("click", function () {
+        // console.log('spend clicked');
+        store.dispatch({ type: "RESET" });
+      });
     </script>
   </body>
-</html> -->
+</html>
