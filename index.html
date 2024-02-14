@@ -8,40 +8,65 @@
 
       :root {
         --white: #ffffff;
-        --grey: #222222;
+        --grey: #2c2c2c;
         --dark: #10327e;
         --light: #507ddf;
-        --font-small: 1rem;
-        --font-med: 2rem;
-        --font-large: 3rem;
-        --font-xlarge: 8rem;
+        --font-small: 0.8rem;
+        --font-med: 1rem;
+        --font-large: 2rem;
+        --font-xlarge: 4rem;
       }
 
-      html {
+      html,
+      body {
+        margin: 0;
         height: 100%;
       }
 
-      body {
+      html {
         background: linear-gradient(to bottom, var(--white), var(--dark));
+      }
+
+      body {
         color: var(--white);
         display: flex;
         justify-content: center;
         flex-direction: column;
         align-items: center;
-        font-family: "Roboto", "Arial";
+        font-family: "Poppins", "Arial";
         font-weight: bold;
         font-size: var(--font-med);
+        width: 100%;
+        height: 100%;
+      }
+
+      .header {
+        background: var(--grey);
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 10;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: start;
+        text-align: left;
+        height: 8%;
+        padding: 1rem;
+      }
+
+      .header > a {
+        text-decoration: none;
+        color: var(--white);
       }
 
       .container {
         /* position: absolute; */
-        margin: auto;
+        /* margin: auto; */
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 3rem;
-        /* border: 1px solid red */
       }
 
       .container > div {
@@ -49,6 +74,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        /* height: 100%; */
         padding: 2rem;
         width: 100%;
       }
@@ -66,8 +92,7 @@
 
       .options {
         text-align: center;
-        padding: 2rem;
-        margin: 2rem;
+        padding: 1rem;
         display: flex;
       }
 
@@ -131,10 +156,10 @@
       }
 
       .footer {
-        position: absolute;
-
+        position: fixed;
         bottom: 0;
-        font-size: 1.2rem;
+        text-align: right;
+        font-size: var(--font-small);
         font-weight: normal;
       }
 
@@ -153,6 +178,7 @@
     </style>
   </head>
   <body>
+    <div class="header"><a href="/">HARSH REALITY</a></div>
     <div id="modal"></div>
     <div class="container">
       <div class="title-container">WHAT ARE YOU DOING TODAY?</div>
@@ -178,10 +204,10 @@
           <svg
             aria-hidden="true"
             class="octicon octicon-mark-github"
-            height="40"
+            width="25"
+            height="25"
             version="1.1"
             viewBox="0 0 16 16"
-            width="40"
           >
             <path
               fill-rule="evenodd"
