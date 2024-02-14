@@ -48,6 +48,7 @@
       .title-container {
         display: flex;
         justify-content: center;
+        text-align: center;
         /* align-items: center; */
         font-size: var(--font-large);
         color: var(--color-dark);
@@ -56,6 +57,7 @@
       }
 
       .options {
+        text-align: center;
         padding: 2rem;
         margin: 2rem;
         display: flex;
@@ -75,9 +77,11 @@
       .selector:hover {
         background: var(--color-dark);
         color: white;
+        cursor: pointer;
       }
 
       .bank-balance-title {
+        text-align: center;
         display: flex;
         justify-content: center;
         font-size: var(--font-large);
@@ -93,10 +97,14 @@
         font-size: var(--font-med);
       }
 
-      .diff {
+      .added {
         border: 1px solid red;
+      }
+
+      .animate {
         animation-name: showAdded;
-        animation-duration: 500ms;
+        animation-duration: 3000ms;
+        animation-timing-function: ease;
       }
 
       @keyframes showAdded {
@@ -124,39 +132,50 @@
         <div class="bank-balance-title"><b>YOUR BANK BALANCE IS</b></div>
         <div id="bank-balance">0</div>
       </div>
-      <div class="diff"></div>
+      <div class="added"></div>
       <button id="reset">RESET</button>
     </div>
 
     <script type="module">
       import { createStore } from "https://unpkg.com/redux@latest/dist/redux.browser.mjs";
-      const initialBalance = {
+
+      const displayBalance = document.querySelector("#bank-balance");
+      const added = document.querySelector(".added");
+      const reset = document.querySelector("#reset");
+
+      const initialState = {
         value: 0,
-        numToAdd: 0,
-        numToSubtract: 0,
-        diff: 0,
+        numToAdd: Math.ceil(Math.random() * 10),
       };
 
-      function reducer(state = initialBalance, action) {
+      function animateAdded(t) {
+        t.classList.add("animate");
+        // t.classList.remove("animate");
+      }
+
+      function reducer(state = initialState, action) {
+        animateAdded(added);
         switch (action.type) {
           case "EARN":
             return {
               ...state,
-              numToAdd: Math.floor(Math.random() * 10),
               value: state.value + state.numToAdd,
-              diff: state.value - state.numToAdd,
+              numToAdd: Math.ceil(Math.random() * 10),
             };
           case "SPEND":
             return {
               ...state,
               value: state.value - numToSubtract,
-              numToSubtract: Math.floor(Math.random() * 10),
             };
 
           case "RESET":
             return {
               ...state,
+              value: 0,
+              prevValue: 0,
               diff: 0,
+              numToAdd: Math.ceil(Math.random() * 10),
+              prevNumToAdd: 0,
             };
 
           default:
@@ -165,21 +184,12 @@
       }
 
       const store = createStore(reducer);
-      const displayBalance = document.querySelector("#bank-balance");
-      const diff = document.querySelector(".diff");
-      const reset = document.querySelector("#reset");
-
-      function resetDiff() {
-        state.diff = 0;
-      }
 
       function render() {
+        console.log("render func run");
         const state = store.getState();
         displayBalance.innerHTML = `$${state.value.toString()}`;
-        diff.innerHTML =
-          `numToAdd: ${state.numToAdd}` +
-          "<br />" +
-          `diff: $${Math.abs(state.diff).toString()}`;
+        added.innerHTML = `+ $${state.numToAdd}`;
       }
       render();
 
@@ -188,6 +198,7 @@
       document.querySelector("#earn").addEventListener("click", function () {
         // console.log('earn clicked');
         store.dispatch({ type: "EARN" });
+        console.log("after dispatch earn");
       });
       document.querySelector("#spend").addEventListener("click", function () {
         // console.log('spend clicked');
