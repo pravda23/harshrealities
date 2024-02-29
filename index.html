@@ -20,7 +20,10 @@
     <script type="text/javascript"></script>
   </head>
   <body>
-    <div id="modalEnd" class="center-column"></div>
+    <div
+      id="modalEnd"
+      class="absolute z-[100] bg-zinc-800 w-full h-full text-white font-bold flex justify-center items-center border-4 border-white"
+    ></div>
     <!-- <div id="modalTally" class="center-column"></div> -->
     <header
       class="h-20 sm:h-20 p-6 text-xl sm:text-md bg-zinc-950 text-white flex justify-start items-center"
@@ -57,16 +60,18 @@
     <main
       class="fixed top-20 sm:top-20 p-10 text-center border-1 border-white text-2xl bg-zinc-900 text-white w-screen h-svh flex flex-col justify-start items-center"
     >
-      <div class="p-4 sm:p-10 font-bold">WHAT ARE YOU DOING TODAY?</div>
+      <div class="header-title my-10 p-4 sm:p-10 font-bold">
+        WHAT ARE YOU DOING TODAY?<br />&nbsp;
+      </div>
       <div class="sm:flex sm:flex-row">
         <div
-          class="m-4 sm:m-2 p-4 sm:p-6 font-bold sm:text-md bg-white border-2 border-red-900 rounded-lg text-red-900 hover:bg-red-900 hover:text-white"
+          class="m-4 sm:m-2 p-4 sm:p-6 font-bold sm:text-md bg-white border-2 border-red-900 rounded-lg text-red-900 hover:bg-red-900 hover:text-white hover:cursor-pointer"
           id="earn"
         >
           WORKING
         </div>
         <div
-          class="m-4 sm:m-2 p-4 sm:p-6 font-bold sm:text-md bg-white border-2 border-red-900 rounded-lg text-red-900 hover:bg-red-900 hover:text-white"
+          class="m-4 sm:m-2 p-4 sm:p-6 font-bold sm:text-md bg-white border-2 border-red-900 rounded-lg text-red-900 hover:bg-red-900 hover:text-white hover:cursor-pointer"
           id="spend"
         >
           LIVING LIFE
@@ -74,12 +79,12 @@
       </div>
 
       <div
-        class="m-4 sm:mt-10 p-6 w-1/2 sm:p-10 bg-red-900 border-2 border-white rounded-lg font-bold"
+        class="m-4 sm:mt-10 p-6 w-2/3 sm:p-10 bg-red-900 border-2 border-white rounded-lg font-bold"
       >
         <div>
           <b>YOU ARE WORTH</b>
         </div>
-        <div id="bank-balance" class="text-6xl">0</div>
+        <div id="balance" class="text-6xl">0</div>
       </div>
     </main>
     <div
@@ -119,7 +124,7 @@
     <script type="module">
       import { createStore } from "https://unpkg.com/redux@latest/dist/redux.browser.mjs";
 
-      const displayBalance = document.querySelector("#bank-balance");
+      const displayBalance = document.querySelector("#balance");
       const added = document.querySelector(".added");
       const reset = document.querySelector("#reset");
       const container = document.querySelector(".container");
@@ -133,17 +138,18 @@
         titleText: "WHAT ARE YOU DOING TODAY?",
       };
 
-      function tally(a) {
-        document.querySelector("#modalTally").style.display = "flex";
-        document.querySelector("#modalTally").innerText = `$${a.prevValue}.`;
-      }
+      // function tally(a) {
+      //   document.querySelector("#modalTally").style.display = "flex";
+      //   document.querySelector("#modalTally").innerText = `$${a.prevValue}.`;
+      // }
 
       function end(a) {
         document.querySelector("#modalEnd").style.display = "flex";
+        console.log("modal clicked");
         document.querySelector(
           "#modalEnd"
-        ).innerText = `You died with $${a.prevValue}.`;
-        document.querySelector(".title-container").innerText =
+        ).innerText = `You died. Your worth was $${a.prevValue}.`;
+        document.querySelector(".header-title").innerText =
           "WHAT ARE YOU DOING TODAY?";
       }
 
@@ -185,15 +191,16 @@
       function render() {
         const state = store.getState();
 
-        if (state.count <= state.endCount) {
+        // if (state.count <= state.endCount) {
+        if (state.count == state.endCount) {
           if (state.count > 0) {
-            document.querySelector(".title-container").innerText =
+            document.querySelector(".header-title").innerText =
               "GOOD. NOW CONTINUE TO CHOOSE YOUR EXISTENCE.";
           }
 
           if (state.count > 3) {
-            document.querySelector(".title-container").innerText =
-              "GOOD. CONTINUE.";
+            document.querySelector(".header-title").innerHTML =
+              "GOOD. CONTINUE.<br />&nbsp;";
           }
 
           displayBalance.innerHTML = `$${state.value.toString()}`;
@@ -204,7 +211,7 @@
           end(state);
         }
 
-        tally(state.prevValue);
+        // tally(state.prevValue);
       }
       render();
 
@@ -215,6 +222,7 @@
       });
       document.querySelector("#spend").addEventListener("click", function () {
         store.dispatch({ type: "SPEND" });
+        console.log("spend clidked");
       });
       document
         .querySelector("#modalEnd")
