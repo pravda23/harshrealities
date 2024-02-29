@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style type="text/css">
-      * {
+      *,
+      ::before,
+      ::after {
         box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
       }
     </style>
     <style type="text/tailwindcss"></style>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script type="text/javascript"></script>
   </head>
   <body>
     <div id="modalEnd" class="center-column"></div>
     <!-- <div id="modalTally" class="center-column"></div> -->
     <header
-      class="p-10 text-3xl bg-zinc-950 text-white h-40 flex justify-start items-center"
+      class="h-20 sm:h-20 p-6 text-xl sm:text-md bg-zinc-950 text-white flex justify-start items-center"
     >
       <a href="/">
         <svg
@@ -45,170 +55,172 @@
       ><a href="/"> &nbsp;&nbsp;HARSH REALITY</a>
     </header>
     <main
-      class="text-center text-5xl bg-zinc-900 text-white w-screen h-screen flex flex-col justify-start items-center"
+      class="fixed top-20 sm:top-20 p-10 text-center border-1 border-white text-2xl bg-zinc-900 text-white w-screen h-svh flex flex-col justify-start items-center"
     >
-      <div class="p-20 font-bold">WHAT ARE YOU DOING TODAY?</div>
-      <div
-        class="m-10 p-10 font-bold bg-white border-1 border-red-900 rounded-lg text-red-900"
-        id="earn"
-      >
-        WORKING
+      <div class="p-4 sm:p-10 font-bold">WHAT ARE YOU DOING TODAY?</div>
+      <div class="sm:flex sm:flex-row">
+        <div
+          class="m-4 sm:m-2 p-4 sm:p-6 font-bold sm:text-md bg-white border-2 border-red-900 rounded-lg text-red-900 hover:bg-red-900 hover:text-white"
+          id="earn"
+        >
+          WORKING
+        </div>
+        <div
+          class="m-4 sm:m-2 p-4 sm:p-6 font-bold sm:text-md bg-white border-2 border-red-900 rounded-lg text-red-900 hover:bg-red-900 hover:text-white"
+          id="spend"
+        >
+          LIVING LIFE
+        </div>
       </div>
+
       <div
-        class="m-10 p-10 font-bold bg-white border-1 border-white-900 rounded-lg text-red-900"
-        id="spend"
+        class="m-4 sm:mt-10 p-6 w-1/2 sm:p-10 bg-red-900 border-2 border-white rounded-lg font-bold"
       >
-        LIVING LIFE
-      </div>
-      <div
-        class="m-10 p-20 bg-red-900 border-2 border-white rounded-lg font-bold"
-      >
-        <div class="font-bold">
+        <div>
           <b>YOU ARE WORTH</b>
         </div>
-        <div id="bank-balance" class="text-9xl">0</div>
+        <div id="bank-balance" class="text-6xl">0</div>
       </div>
-      <div
-        class="flex flex-row justify-center items-center fixed bottom-0 w-screen p-10 border-t-1 border-white text-3xl text-gray-400"
-      >
+    </main>
+    <div
+      class="flex flex-row justify-center items-center fixed bottom-0 w-screen p-4 border-t-1 border-white text-sm sm:text-sm text-gray-400"
+    >
+      <a
+        href="https://github.com/pravda23/harshrealities"
+        aria-label="Homepage"
+        title="GitHub"
+        style="text-decoration: none"
+        target="_blank"
+        ><svg
+          aria-hidden="true"
+          class="octicon octicon-mark-github"
+          width="25"
+          height="25"
+          version="1.1"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill="gray"
+            fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+          ></path>
+        </svg>
         <a
           href="https://github.com/pravda23/harshrealities"
           aria-label="Homepage"
           title="GitHub"
           style="text-decoration: none"
           target="_blank"
-          ><svg
-            aria-hidden="true"
-            class="octicon octicon-mark-github"
-            width="50"
-            height="50"
-            version="1.1"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fill="gray"
-              fill-rule="evenodd"
-              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-            ></path>
-          </svg>
-          <a
-            href="https://github.com/pravda23/harshrealities"
-            aria-label="Homepage"
-            title="GitHub"
-            style="text-decoration: none"
-            target="_blank"
-          >
-            &nbsp;&nbsp;A REDUX COUNTER APP</a
-          >
-        </a>
-      </div>
+        >
+          &nbsp;&nbsp;A REDUX COUNTER APP</a
+        >
+      </a>
+    </div>
+    <script type="module">
+      import { createStore } from "https://unpkg.com/redux@latest/dist/redux.browser.mjs";
 
-      <script type="module">
-        import { createStore } from "https://unpkg.com/redux@latest/dist/redux.browser.mjs";
+      const displayBalance = document.querySelector("#bank-balance");
+      const added = document.querySelector(".added");
+      const reset = document.querySelector("#reset");
+      const container = document.querySelector(".container");
 
-        const displayBalance = document.querySelector("#bank-balance");
-        const added = document.querySelector(".added");
-        const reset = document.querySelector("#reset");
-        const container = document.querySelector(".container");
+      const initialState = {
+        count: 0,
+        endCount: Math.ceil(Math.random() * 10),
+        value: 0,
+        prevValue: 0,
+        increment: Math.ceil(Math.random() * 1000),
+        titleText: "WHAT ARE YOU DOING TODAY?",
+      };
 
-        const initialState = {
-          count: 0,
-          endCount: Math.ceil(Math.random() * 10),
-          value: 0,
-          prevValue: 0,
-          increment: Math.ceil(Math.random() * 1000),
-          titleText: "WHAT ARE YOU DOING TODAY?",
-        };
+      function tally(a) {
+        document.querySelector("#modalTally").style.display = "flex";
+        document.querySelector("#modalTally").innerText = `$${a.prevValue}.`;
+      }
 
-        function tally(a) {
-          document.querySelector("#modalTally").style.display = "flex";
-          document.querySelector("#modalTally").innerText = `$${a.prevValue}.`;
-        }
+      function end(a) {
+        document.querySelector("#modalEnd").style.display = "flex";
+        document.querySelector(
+          "#modalEnd"
+        ).innerText = `You died with $${a.prevValue}.`;
+        document.querySelector(".title-container").innerText =
+          "WHAT ARE YOU DOING TODAY?";
+      }
 
-        function end(a) {
-          document.querySelector("#modalEnd").style.display = "flex";
-          document.querySelector(
-            "#modalEnd"
-          ).innerText = `You died with $${a.prevValue}.`;
-          document.querySelector(".title-container").innerText =
-            "WHAT ARE YOU DOING TODAY?";
-        }
-
-        function reducer(state = initialState, action) {
-          switch (action.type) {
-            case "EARN":
-              return {
-                ...state,
-                count: state.count + 1,
-                value: state.value + state.increment,
-                prevValue: state.value,
-                increment: Math.ceil(Math.random() * 1000),
-              };
-            case "SPEND":
-              return {
-                ...state,
-                count: state.count + 1,
-                value: state.value - state.increment,
-                prevValue: state.value,
-                increment: Math.ceil(Math.random() * 1200),
-              };
-
-            case "RESET":
-              return {
-                ...state,
-                count: 0,
-                endCount: Math.ceil(Math.random() * 10),
-                value: 0,
-                prevValue: 0,
-              };
-
-            default:
-              return state;
-          }
-        }
-
-        const store = createStore(reducer);
-
-        function render() {
-          const state = store.getState();
-
-          if (state.count <= state.endCount) {
-            if (state.count > 0) {
-              document.querySelector(".title-container").innerText =
-                "GOOD. NOW CONTINUE TO CHOOSE YOUR EXISTENCE.";
-            }
-
-            if (state.count > 3) {
-              document.querySelector(".title-container").innerText =
-                "GOOD. CONTINUE.";
-            }
-
-            displayBalance.innerHTML = `$${state.value.toString()}`;
-          } else {
-            modalEnd.onclick = (e) => {
-              modalEnd.style.display = "none";
+      function reducer(state = initialState, action) {
+        switch (action.type) {
+          case "EARN":
+            return {
+              ...state,
+              count: state.count + 1,
+              value: state.value + state.increment,
+              prevValue: state.value,
+              increment: Math.ceil(Math.random() * 1000),
             };
-            end(state);
+          case "SPEND":
+            return {
+              ...state,
+              count: state.count + 1,
+              value: state.value - state.increment,
+              prevValue: state.value,
+              increment: Math.ceil(Math.random() * 1200),
+            };
+
+          case "RESET":
+            return {
+              ...state,
+              count: 0,
+              endCount: Math.ceil(Math.random() * 10),
+              value: 0,
+              prevValue: 0,
+            };
+
+          default:
+            return state;
+        }
+      }
+
+      const store = createStore(reducer);
+
+      function render() {
+        const state = store.getState();
+
+        if (state.count <= state.endCount) {
+          if (state.count > 0) {
+            document.querySelector(".title-container").innerText =
+              "GOOD. NOW CONTINUE TO CHOOSE YOUR EXISTENCE.";
           }
 
-          tally(state.prevValue);
+          if (state.count > 3) {
+            document.querySelector(".title-container").innerText =
+              "GOOD. CONTINUE.";
+          }
+
+          displayBalance.innerHTML = `$${state.value.toString()}`;
+        } else {
+          modalEnd.onclick = (e) => {
+            modalEnd.style.display = "none";
+          };
+          end(state);
         }
-        render();
 
-        store.subscribe(render);
+        tally(state.prevValue);
+      }
+      render();
 
-        document.querySelector("#earn").addEventListener("click", function () {
-          store.dispatch({ type: "EARN" });
+      store.subscribe(render);
+
+      document.querySelector("#earn").addEventListener("click", function () {
+        store.dispatch({ type: "EARN" });
+      });
+      document.querySelector("#spend").addEventListener("click", function () {
+        store.dispatch({ type: "SPEND" });
+      });
+      document
+        .querySelector("#modalEnd")
+        .addEventListener("click", function () {
+          store.dispatch({ type: "RESET" });
         });
-        document.querySelector("#spend").addEventListener("click", function () {
-          store.dispatch({ type: "SPEND" });
-        });
-        document
-          .querySelector("#modalEnd")
-          .addEventListener("click", function () {
-            store.dispatch({ type: "RESET" });
-          });
-      </script>
-    </main>
+    </script>
   </body>
 </html>
