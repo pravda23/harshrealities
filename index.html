@@ -24,7 +24,13 @@
       id="modalEnd"
       class="absolute z-[100] bg-zinc-800 w-full h-full text-white font-bold flex justify-center items-center border-4 border-white"
     ></div>
-    <!-- <div id="modalTally" class="center-column"></div> -->
+    <div id="modalTally" class="relative">
+      <div
+        class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[100] w-1/2 h-1/4 bg-white text-zinc-800 font-bold flex justify-center items-center text-6xl rounded-lg"
+      >
+        $0
+      </div>
+    </div>
     <header
       class="h-20 sm:h-20 p-6 text-xl sm:text-md bg-zinc-950 text-white flex justify-start items-center"
     >
@@ -60,21 +66,21 @@
     <main
       class="fixed top-20 sm:top-20 p-10 text-center border-1 border-white text-2xl bg-zinc-900 text-white w-screen h-svh flex flex-col justify-start items-center"
     >
-      <div class="header-title my-10 p-4 sm:p-10 font-bold">
-        WHAT ARE YOU DOING TODAY?<br />&nbsp;
+      <div id="hero-text" class="my-10 p-4 sm:p-10 font-bold">
+        WHAT ARE YOU DOING WITH YOUR LIFE?<br />&nbsp;
       </div>
       <div class="sm:flex sm:flex-row">
         <div
           class="m-4 sm:m-2 p-4 sm:p-6 font-bold sm:text-md bg-white border-2 border-red-900 rounded-lg text-red-900 hover:bg-red-900 hover:text-white hover:cursor-pointer"
-          id="earn"
+          id="add"
         >
           WORKING
         </div>
         <div
           class="m-4 sm:m-2 p-4 sm:p-6 font-bold sm:text-md bg-white border-2 border-red-900 rounded-lg text-red-900 hover:bg-red-900 hover:text-white hover:cursor-pointer"
-          id="spend"
+          id="subtract"
         >
-          LIVING LIFE
+          LIVING IT
         </div>
       </div>
 
@@ -125,9 +131,11 @@
       import { createStore } from "https://unpkg.com/redux@latest/dist/redux.browser.mjs";
 
       const displayBalance = document.querySelector("#balance");
-      const added = document.querySelector(".added");
       const reset = document.querySelector("#reset");
-      const container = document.querySelector(".container");
+      const modalEnd = document.querySelector("#modalEnd");
+      const addBtn = document.querySelector("#add");
+      const subtractBtn = document.querySelector("#subtract");
+      let heroText = document.querySelector("#hero-text");
 
       const initialState = {
         count: 0,
@@ -135,7 +143,6 @@
         value: 0,
         prevValue: 0,
         increment: Math.ceil(Math.random() * 1000),
-        titleText: "WHAT ARE YOU DOING TODAY?",
       };
 
       // function tally(a) {
@@ -143,19 +150,9 @@
       //   document.querySelector("#modalTally").innerText = `$${a.prevValue}.`;
       // }
 
-      function end(a) {
-        document.querySelector("#modalEnd").style.display = "flex";
-        console.log("modal clicked");
-        document.querySelector(
-          "#modalEnd"
-        ).innerText = `You died. Your worth was $${a.prevValue}.`;
-        document.querySelector(".header-title").innerText =
-          "WHAT ARE YOU DOING TODAY?";
-      }
-
       function reducer(state = initialState, action) {
         switch (action.type) {
-          case "EARN":
+          case "ADD":
             return {
               ...state,
               count: state.count + 1,
@@ -163,7 +160,7 @@
               prevValue: state.value,
               increment: Math.ceil(Math.random() * 1000),
             };
-          case "SPEND":
+          case "SUBTRACT":
             return {
               ...state,
               count: state.count + 1,
@@ -187,28 +184,28 @@
       }
 
       const store = createStore(reducer);
+      console.log(store.getState().showEndModal);
+      modalEnd.style.display = "none";
 
       function render() {
         const state = store.getState();
 
-        // if (state.count <= state.endCount) {
-        if (state.count == state.endCount) {
+        if (state.count < state.endCount) {
           if (state.count > 0) {
-            document.querySelector(".header-title").innerText =
-              "GOOD. NOW CONTINUE TO CHOOSE YOUR EXISTENCE.";
+            heroText.innerText = "GOOD. NOW CONTINUE TO CHOOSE YOUR EXISTENCE.";
           }
 
           if (state.count > 3) {
-            document.querySelector(".header-title").innerHTML =
-              "GOOD. CONTINUE.<br />&nbsp;";
+            heroText.innerHTML = "GOOD. CONTINUE.<br>&nbsp;";
           }
 
           displayBalance.innerHTML = `$${state.value.toString()}`;
         } else {
-          modalEnd.onclick = (e) => {
-            modalEnd.style.display = "none";
-          };
-          end(state);
+          modalEnd.style.display = "flex";
+          modalEnd.innerText = `You died. Your worth was $${
+            store.getState().prevValue
+          }.`;
+          heroText.innerText = "WHAT ARE YOU DOING WITH YOUR LIFE?";
         }
 
         // tally(state.prevValue);
@@ -216,19 +213,25 @@
       render();
 
       store.subscribe(render);
+      console.log(store.getState().showEndModal);
 
-      document.querySelector("#earn").addEventListener("click", function () {
-        store.dispatch({ type: "EARN" });
+      addBtn.addEventListener("click", function () {
+        store.dispatch({ type: "ADD" });
       });
-      document.querySelector("#spend").addEventListener("click", function () {
-        store.dispatch({ type: "SPEND" });
-        console.log("spend clidked");
+      subtractBtn.addEventListener("click", function () {
+        store.dispatch({ type: "SUBTRACT" });
       });
-      document
-        .querySelector("#modalEnd")
-        .addEventListener("click", function () {
-          store.dispatch({ type: "RESET" });
-        });
+
+      if (store.getState.showEndModal === true) {
+      } else {
+        console.log("modalEnd false");
+      }
+
+      modalEnd.addEventListener("click", function () {
+        modalEnd.style.display = "none";
+        store.dispatch({ type: "RESET" });
+        console.log("modal clicked");
+      });
     </script>
   </body>
 </html>
