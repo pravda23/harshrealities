@@ -24,8 +24,9 @@
       id="modalEnd"
       class="absolute z-[100] bg-zinc-800 w-full h-full text-white font-bold flex justify-center items-center border-4 border-white"
     ></div>
-    <div id="modalTally" class="relative">
+    <div class="relative">
       <div
+        id="modalTally"
         class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[100] w-1/2 h-1/4 bg-white text-zinc-800 font-bold flex justify-center items-center text-6xl rounded-lg"
       >
         $0
@@ -133,6 +134,7 @@
       const displayBalance = document.querySelector("#balance");
       const reset = document.querySelector("#reset");
       const modalEnd = document.querySelector("#modalEnd");
+      const modalTally = document.querySelector("#modalTally");
       const addBtn = document.querySelector("#add");
       const subtractBtn = document.querySelector("#subtract");
       let heroText = document.querySelector("#hero-text");
@@ -145,10 +147,9 @@
         increment: Math.ceil(Math.random() * 1000),
       };
 
-      // function tally(a) {
-      //   document.querySelector("#modalTally").style.display = "flex";
-      //   document.querySelector("#modalTally").innerText = `$${a.prevValue}.`;
-      // }
+      modalTally.style.display = "none";
+
+      function tally(a) {}
 
       function reducer(state = initialState, action) {
         switch (action.type) {
@@ -217,9 +218,14 @@
 
       addBtn.addEventListener("click", function () {
         store.dispatch({ type: "ADD" });
+        modalTally.style.display = "flex";
+        modalTally.classList.add("animate-ping");
+        modalTally.innerText = `$${store.getState().prevValue}.`;
       });
       subtractBtn.addEventListener("click", function () {
         store.dispatch({ type: "SUBTRACT" });
+        modalTally.style.display = "flex";
+        modalTally.innerText = `$${store.getState().prevValue}.`;
       });
 
       if (store.getState.showEndModal === true) {
