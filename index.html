@@ -16,6 +16,17 @@
       }
     </style>
     <style type="text/tailwindcss"></style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              clifford: "#da373d",
+            },
+          },
+        },
+      };
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="text/javascript"></script>
   </head>
@@ -24,6 +35,7 @@
       id="modalEnd"
       class="absolute z-[100] bg-zinc-800 w-full h-full text-white font-bold flex justify-center items-center border-4 border-white"
     ></div>
+    <div class="bg-clifford">HELLO</div>
     <!-- <div id="modalTally" class="center-column"></div> -->
     <header
       class="h-20 sm:h-20 p-6 text-xl sm:text-md bg-zinc-950 text-white flex justify-start items-center"
