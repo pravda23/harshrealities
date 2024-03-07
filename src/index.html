@@ -60,10 +60,10 @@
       ><a href="/"> &nbsp;&nbsp;HARSH REALITY</a>
     </header>
     <main
-      class="fixed top-20 sm:top-20 p-10 text-center border-1 border-white text-2xl bg-zinc-900 text-white w-screen h-svh flex flex-col justify-start items-center"
+      class="fixed top-20 sm:top-20 p-10 text-center border-1 border-white text-2xl bg-zinc-800 text-white w-screen h-svh flex flex-col justify-start items-center"
     >
-      <div id="hero-text" class="p-4 sm:p-10 font-bold">
-        WHAT ARE YOU DOING WITH YOUR LIFE?<br />&nbsp;
+      <div id="hero-text" class="animate-fade-up p-4 sm:p-10 font-bold">
+        WHAT ARE YOU DOING WITH YOUR LIFE?
       </div>
       <div class="sm:flex sm:flex-row">
         <div
@@ -87,7 +87,7 @@
         <b>YOU ARE WORTH</b>
         <div
           id="modalTally"
-          class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white text-zinc-800 p-2 rounded-full font-bold flex justify-center items-center text-4xl"
+          class="animate-fade-up animate-fade animate-delay-300 animate-reverse -150 bg-white text-zinc-800 p-2 rounded-lg font-bold text-4xl"
         >
           $0
         </div>
@@ -141,7 +141,7 @@
 
       const initialState = {
         count: 0,
-        endCount: Math.ceil(Math.random() * 10),
+        endCount: Math.ceil(Math.random() * 100),
         value: 0,
         prevValue: 0,
         increment: Math.ceil(Math.random() * 1000),
@@ -196,11 +196,11 @@
 
         if (state.count < state.endCount) {
           if (state.count > 0) {
-            heroText.innerText = "GOOD. NOW CONTINUE TO CHOOSE YOUR EXISTENCE.";
+            heroText.innerText = "CONTINUE TO CHOOSE YOUR EXISTENCE.";
           }
 
           if (state.count > 3) {
-            heroText.innerHTML = "GOOD. CONTINUE.<br>&nbsp;";
+            heroText.innerHTML = "CONTINUE.";
           }
 
           displayBalance.innerHTML = `$${state.value.toString()}`;
