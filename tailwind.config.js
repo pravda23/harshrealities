@@ -9,16 +9,18 @@ module.exports = {
       keyframes: {
         customPing: {
           "0%": {
-            transform: "scale(1)",
-            opacity: 0,
+            // transform: "scale(1.2)",
+            opacity: 1,
           },
-          "50%": {
-            transform: "scale(1.2)",
+          "80%": {
+            // transform: "scale(1.2)",
+            transform: "translateY(-40px)",
             opacity: 1,
           },
 
           "100%": {
             transform: "scale(1)",
+            transform: "translateY(-40px)",
             opacity: 0,
           },
         },

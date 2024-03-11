@@ -39,7 +39,7 @@ function reducer(state = initialState, action) {
         count: state.count + 1,
         value: state.value - state.increment,
         prevValue: state.value,
-        increment: Math.ceil(Math.random() * 1200),
+        increment: Math.ceil(Math.random() * 1800),
         modalTallyValue: `-${state.increment}`,
       };
 
@@ -85,21 +85,29 @@ store.subscribe(render);
 
 addBtn.addEventListener("click", function () {
   store.dispatch({ type: "ADD" });
+  modalTally.classList.add("animate-customPing");
   modalTally.innerText = `${store.getState().modalTallyValue}`;
   modalTally.style.opacity = 1;
-  modalTally.classList.add("animate-customPing");
-  modalTally.style.opacity = 0;
+  modalTally.addEventListener("animationend", function () {
+    modalTally.style.opacity = 0;
+    modalTally.removeEventListener("animationend", this);
+    modalTally.classList.remove("animate-customPing");
+  });
 });
 
 subtractBtn.addEventListener("click", function () {
   store.dispatch({ type: "SUBTRACT" });
-  modalTally.style.display = "flex";
+  modalTally.classList.add("animate-customPing");
   modalTally.innerText = `${store.getState().modalTallyValue}`;
+  modalTally.style.opacity = 1;
+  modalTally.addEventListener("animationend", function () {
+    modalTally.style.opacity = 0;
+    modalTally.removeEventListener("animationend", this);
+    modalTally.classList.remove("animate-customPing");
+  });
 });
 
 if (store.getState.showEndModal === true) {
-} else {
-  console.log("modalEnd false");
 }
 
 modalEnd.addEventListener("click", function () {
