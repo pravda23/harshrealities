@@ -22,6 +22,7 @@
     <script type="text/javascript"></script>
   </head>
   <body>
+    <!-- MODAL END -->
     <div
       id="modalEnd"
       class="absolute z-[100] bg-zinc-800 w-full h-full text-white font-bold flex justify-center items-center border-4 border-white"
@@ -60,7 +61,7 @@
       ><a href="/"> &nbsp;&nbsp;HARSH REALITY</a>
     </header>
     <main
-      class="fixed top-20 sm:top-20 p-10 text-center border-1 border-white text-2xl bg-zinc-800 text-white w-screen h-svh flex flex-col justify-start items-center"
+      class="fixed top-20 sm:top-20 p-10 text-center border-1 border-white text-2xl bg-clifford text-white w-screen h-svh flex flex-col justify-start items-center"
     >
       <div id="hero-text" class="animate-fade-up p-4 sm:p-10 font-bold">
         WHAT ARE YOU DOING WITH YOUR LIFE?
@@ -85,9 +86,10 @@
       >
         <div class="relative"></div>
         <b>YOU ARE WORTH</b>
+        <!-- MODAL TALLY -->
         <div
           id="modalTally"
-          class="animate-fade-up animate-fade animate-delay-300 animate-reverse -150 bg-white text-zinc-800 p-2 rounded-lg font-bold text-4xl"
+          class="animate-jump bg-white text-zinc-800 p-2 rounded-lg font-bold text-4xl"
         >
           $0
         </div>
@@ -148,13 +150,19 @@
         modalTallyValue: 0,
       };
 
-      modalTally.style.display = "none";
+      const store = createStore(reducer);
+
+      modalEnd.style.display = "none";
 
       function tally(a) {}
 
       function reducer(state = initialState, action) {
         switch (action.type) {
           case "ADD":
+            modalTally.style.display = "flex";
+            modalTally.innerText = `${state.modalTallyValue}`;
+
+            modalTally.classList.add("animate-fade-out");
             return {
               ...state,
               count: state.count + 1,
@@ -188,9 +196,6 @@
         }
       }
 
-      const store = createStore(reducer);
-      modalEnd.style.display = "none";
-
       function render() {
         const state = store.getState();
 
@@ -220,8 +225,6 @@
 
       addBtn.addEventListener("click", function () {
         store.dispatch({ type: "ADD" });
-        modalTally.style.display = "flex";
-        modalTally.innerText = `${store.getState().modalTallyValue}`;
       });
 
       subtractBtn.addEventListener("click", function () {
