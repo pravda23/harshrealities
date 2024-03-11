@@ -757,6 +757,10 @@ video {
   color: rgb(39 39 42 / var(--tw-text-opacity));
 }
 
+.opacity-0 {
+  opacity: 0;
+}
+
 .hover\:cursor-pointer:hover {
   cursor: pointer;
 }

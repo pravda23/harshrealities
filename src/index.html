@@ -89,7 +89,7 @@
         <!-- MODAL TALLY -->
         <div
           id="modalTally"
-          class="animate-customPing bg-white text-zinc-800 p-2 rounded-lg font-bold text-4xl"
+          class="opacity-0 bg-white text-zinc-800 p-2 rounded-lg font-bold text-4xl"
         >
           $0
         </div>
@@ -130,119 +130,6 @@
         >
       </a>
     </div>
-    <script type="module">
-      import { createStore } from "https://unpkg.com/redux@latest/dist/redux.browser.mjs";
-
-      const displayBalance = document.querySelector("#balance");
-      const reset = document.querySelector("#reset");
-      const modalEnd = document.querySelector("#modalEnd");
-      const modalTally = document.querySelector("#modalTally");
-      const addBtn = document.querySelector("#add");
-      const subtractBtn = document.querySelector("#subtract");
-      const heroText = document.querySelector("#hero-text");
-
-      const initialState = {
-        count: 0,
-        endCount: Math.ceil(Math.random() * 100),
-        value: 0,
-        prevValue: 0,
-        increment: Math.ceil(Math.random() * 1000),
-        modalTallyValue: 0,
-      };
-
-      const store = createStore(reducer);
-
-      modalEnd.style.display = "none";
-
-      function tally(a) {}
-
-      function reducer(state = initialState, action) {
-        switch (action.type) {
-          case "ADD":
-            modalTally.style.display = "flex";
-            modalTally.innerText = `${state.modalTallyValue}`;
-
-            modalTally.classList.add("animate-fade-out");
-            return {
-              ...state,
-              count: state.count + 1,
-              value: state.value + state.increment,
-              prevValue: state.value,
-              increment: Math.ceil(Math.random() * 1000),
-              modalTallyValue: `+${state.increment}`,
-            };
-          case "SUBTRACT":
-            return {
-              ...state,
-              count: state.count + 1,
-              value: state.value - state.increment,
-              prevValue: state.value,
-              increment: Math.ceil(Math.random() * 1200),
-              modalTallyValue: `-${state.increment}`,
-            };
-
-          case "RESET":
-            return {
-              ...state,
-              count: 0,
-              endCount: Math.ceil(Math.random() * 10),
-              value: 0,
-              prevValue: 0,
-              increment: 0,
-            };
-
-          default:
-            return state;
-        }
-      }
-
-      function render() {
-        const state = store.getState();
-
-        if (state.count < state.endCount) {
-          if (state.count > 0) {
-            heroText.innerText = "CONTINUE TO CHOOSE YOUR EXISTENCE.";
-          }
-
-          if (state.count > 3) {
-            heroText.innerHTML = "CONTINUE.";
-          }
-
-          displayBalance.innerHTML = `$${state.value.toString()}`;
-        } else {
-          modalEnd.style.display = "flex";
-          modalEnd.innerText = `You died. Your worth was $${
-            store.getState().prevValue
-          }.`;
-          heroText.innerText = "WHAT ARE YOU DOING WITH YOUR LIFE?";
-        }
-
-        // tally(state.prevValue);
-      }
-      render();
-
-      store.subscribe(render);
-
-      addBtn.addEventListener("click", function () {
-        store.dispatch({ type: "ADD" });
-      });
-
-      subtractBtn.addEventListener("click", function () {
-        store.dispatch({ type: "SUBTRACT" });
-        modalTally.style.display = "flex";
-        modalTally.innerText = `${store.getState().modalTallyValue}`;
-      });
-
-      if (store.getState.showEndModal === true) {
-      } else {
-        console.log("modalEnd false");
-      }
-
-      modalEnd.addEventListener("click", function () {
-        modalEnd.style.display = "none";
-        store.dispatch({ type: "RESET" });
-        console.log("modal clicked");
-      });
-    </script>
+    <script type="module" src="./app.js"></script>
   </body>
 </html>
