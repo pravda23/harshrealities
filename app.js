@@ -64,10 +64,11 @@ function render() {
   if (state.count < state.endCount) {
     if (state.count > 0) {
       heroText.innerText = "CONTINUE TO CHOOSE YOUR EXISTENCE.";
+      heroText.classList.add("animate-pulse");
     }
 
     if (state.count > 3) {
-      heroText.innerHTML = "CONTINUE.";
+      heroText.innerHTML = "IT WILL BE OVER SOON. CONTINUE.";
     }
 
     displayBalance.innerHTML = `$${state.value.toString()}`;
@@ -81,30 +82,39 @@ function render() {
 }
 render();
 
+// const popupAmount = () => {
+//   modalTally.classList.add("animate-customPing");
+//   modalTally.innerText = `${store.getState().modalTallyValue}`;
+//   modalTally.style.opacity = 1;
+//   modalTally.addEventListener("animationend", function () {
+//     modalTally.style.opacity = 0;
+//     modalTally.removeEventListener("animationend", this);
+//     modalTally.classList.remove("animate-customPing");
+//   });
+// };
+
+const popupTrigger = (transactionType) => {
+  const popup = document.querySelector(transactionType);
+  popup.innerText = `${store.getState().modalTallyValue}`;
+  popup.classList.add("animate-customPing");
+  popup.style.opacity = 1;
+  popup.addEventListener("animationend", function () {
+    popup.style.opacity = 0;
+    popup.removeEventListener("animationend", this);
+    popup.classList.remove("animate-customPing");
+  });
+};
+
 store.subscribe(render);
 
 addBtn.addEventListener("click", function () {
   store.dispatch({ type: "ADD" });
-  modalTally.classList.add("animate-customPing");
-  modalTally.innerText = `${store.getState().modalTallyValue}`;
-  modalTally.style.opacity = 1;
-  modalTally.addEventListener("animationend", function () {
-    modalTally.style.opacity = 0;
-    modalTally.removeEventListener("animationend", this);
-    modalTally.classList.remove("animate-customPing");
-  });
+  popupTrigger("#popupAdd");
 });
 
 subtractBtn.addEventListener("click", function () {
   store.dispatch({ type: "SUBTRACT" });
-  modalTally.classList.add("animate-customPing");
-  modalTally.innerText = `${store.getState().modalTallyValue}`;
-  modalTally.style.opacity = 1;
-  modalTally.addEventListener("animationend", function () {
-    modalTally.style.opacity = 0;
-    modalTally.removeEventListener("animationend", this);
-    modalTally.classList.remove("animate-customPing");
-  });
+  popupTrigger("#popupSubtract");
 });
 
 if (store.getState.showEndModal === true) {

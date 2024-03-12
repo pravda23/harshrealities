@@ -63,22 +63,29 @@
     <main
       class="fixed top-20 sm:top-20 p-10 text-center border-1 border-white text-2xl bg-zinc-800 text-white w-screen h-svh flex flex-col justify-start items-center"
     >
-      <div id="hero-text" class="animate-fade-up p-4 sm:p-10 font-bold">
+      <div id="hero-text" class="animate-pulse p-4 sm:p-10 font-bold">
         WHAT ARE YOU DOING WITH YOUR LIFE?
       </div>
-      <div class="sm:flex sm:flex-row">
+
+      <div class="sm:flex sm:flex-row p-8">
+        <div id="popupAdd" class="absolute"></div>
         <div
           class="m-4 sm:m-2 p-4 sm:p-6 font-bold sm:text-md bg-white border-2 border-red-900 rounded-lg text-red-900 hover:bg-red-900 hover:text-white hover:cursor-pointer"
           id="add"
         >
           WORKING
         </div>
+
         <div
-          class="m-4 sm:m-2 p-4 sm:p-6 font-bold sm:text-md bg-white border-2 border-red-900 rounded-lg text-red-900 hover:bg-red-900 hover:text-white hover:cursor-pointer"
+          class="relative m-4 sm:m-2 p-4 sm:p-6 font-bold sm:text-md bg-white border-2 border-red-900 rounded-lg text-red-900 hover:bg-red-900 hover:text-white hover:cursor-pointer"
           id="subtract"
         >
           LIVING IT
         </div>
+        <div
+          id="popupSubtract"
+          class="absolute border-green-100 border-2"
+        ></div>
       </div>
 
       <div
@@ -92,11 +99,11 @@
         >
           <div class="">$0</div>
         </div>
-        <div id="balance" class="text-6xl">0</div>
+        <div id="balance" class="sm:text-6xl text-4xl">0</div>
       </div>
     </main>
     <div
-      class="flex flex-row justify-center items-center fixed bottom-0 w-screen p-4 border-t-1 border-white text-sm sm:text-sm text-gray-400"
+      class="flex flex-row justify-center items-center fixed bottom-0 w-screen p-4 border-t-1 border-white text-xs sm:text-sm text-gray-400"
     >
       <a
         href="https://github.com/pravda23/harshrealities"
@@ -107,8 +114,8 @@
         ><svg
           aria-hidden="true"
           class="octicon octicon-mark-github"
-          width="25"
-          height="25"
+          width="20"
+          height="20"
           version="1.1"
           viewBox="0 0 16 16"
         >
