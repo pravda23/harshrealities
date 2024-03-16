@@ -10,7 +10,7 @@ const heroText = document.querySelector("#hero-text");
 
 const initialState = {
   count: 0,
-  endCount: Math.ceil(Math.random() * 100),
+  endCount: Math.ceil(Math.random() * 10),
   value: 0,
   prevValue: 0,
   increment: Math.ceil(Math.random() * 1000),
@@ -47,10 +47,9 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         count: 0,
-        endCount: Math.ceil(Math.random() * 10),
+        endCount: Math.ceil(Math.random() * 15),
         value: 0,
         prevValue: 0,
-        increment: 0,
       };
 
     default:
@@ -72,7 +71,7 @@ function render() {
     }
 
     displayBalance.innerHTML = `$${state.value.toString()}`;
-  } else {
+  } else if (state.count > 3) {
     modalEnd.style.display = "flex";
     modalEnd.innerText = `You died. Your worth was $${
       store.getState().prevValue
@@ -81,17 +80,6 @@ function render() {
   }
 }
 render();
-
-// const popupAmount = () => {
-//   modalTally.classList.add("animate-customPing");
-//   modalTally.innerText = `${store.getState().modalTallyValue}`;
-//   modalTally.style.opacity = 1;
-//   modalTally.addEventListener("animationend", function () {
-//     modalTally.style.opacity = 0;
-//     modalTally.removeEventListener("animationend", this);
-//     modalTally.classList.remove("animate-customPing");
-//   });
-// };
 
 const popupTrigger = (transactionType) => {
   const popup = document.querySelector(transactionType);
@@ -123,5 +111,4 @@ if (store.getState.showEndModal === true) {
 modalEnd.addEventListener("click", function () {
   modalEnd.style.display = "none";
   store.dispatch({ type: "RESET" });
-  console.log("modal clicked");
 });
